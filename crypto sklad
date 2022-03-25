@@ -1,0 +1,173 @@
+-------Фрагмент кода программы, реализующей АРМ товарооборота 4 ver
+
+unit Unit1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Unit2, unit4, ExtCtrls, DBCtrls, Grids, DBGrids, Menus, ComCtrls,
+  DBTables;
+
+type
+  TForm1 = class(TForm)
+    DBGrid1: TDBGrid;
+    MainMenu1: TMainMenu;
+    N3: TMenuItem;
+    N5: TMenuItem;
+    N6: TMenuItem;
+    OpenDialog1: TOpenDialog;
+    SaveDialog1: TSaveDialog;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N4: TMenuItem;
+    N7: TMenuItem;
+    N8: TMenuItem;
+    N9: TMenuItem;
+    N10: TMenuItem;
+    N11: TMenuItem;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    DBGrid2: TDBGrid;
+    DBNavigator1: TDBNavigator;
+    DBNavigator2: TDBNavigator;
+    N12: TMenuItem;
+    N13: TMenuItem;
+    N14: TMenuItem;
+    N15: TMenuItem;
+    N16: TMenuItem;
+    N17: TMenuItem;
+    N18: TMenuItem;
+    procedure N2Click(Sender: TObject);
+    procedure N4Click(Sender: TObject);
+    procedure N5Click(Sender: TObject);
+    procedure N6Click(Sender: TObject);
+    procedure N7Click(Sender: TObject);
+    procedure N8Click(Sender: TObject);
+    procedure N9Click(Sender: TObject);
+    procedure N10Click(Sender: TObject);
+    procedure N11Click(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure N14Click(Sender: TObject);
+    procedure N13Click(Sender: TObject);
+    procedure N16Click(Sender: TObject);
+    procedure N18Click(Sender: TObject);
+    procedure DBNavigator1Click(Sender: TObject; Button: TNavigateBtn);
+   private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+  a:Integer;
+  Table: TTable;
+
+implementation
+Uses unit3;
+{$R *.dfm}
+
+procedure TForm1.N2Click(Sender: TObject);
+begin
+OpenDialog1.Execute;
+DataModule2.Table1.TableName:=OpenDialog1.FileName;
+DataModule2.Table1.Active:=true;
+N3.Enabled:=true;
+end;
+
+procedure TForm1.N4Click(Sender: TObject);
+begin
+DBNavigator1.BtnClick(nbPost);
+end;
+
+procedure TForm1.N5Click(Sender: TObject);
+begin
+try
+DBNavigator1.BtnClick(nbInsert);
+except
+end;
+end;
+
+procedure TForm1.N6Click(Sender: TObject);
+begin
+DBNavigator1.BtnClick(nbDelete);
+end;
+
+procedure TForm1.N7Click(Sender: TObject);
+begin
+DBNavigator1.BtnClick(nbFirst);
+end;
+
+procedure TForm1.N8Click(Sender: TObject);
+begin
+DBNavigator1.BtnClick(nbPrior);
+end;
+
+procedure TForm1.N9Click(Sender: TObject);
+begin
+DBNavigator1.BtnClick(nbNext);
+end;
+
+procedure TForm1.N10Click(Sender: TObject);
+begin
+DBNavigator1.BtnClick(nbLast);
+end;
+
+procedure TForm1.N11Click(Sender: TObject);
+begin
+DBNavigator1.BtnClick(nbEdit);
+end;
+
+procedure TForm1.FormResize(Sender: TObject);
+begin
+PageControl1.Top:=10;
+PageControl1.Height:=Form1.ClientHeight-20;
+PageControl1.Left:=10;
+PageControl1.Width:=Form1.ClientWidth-20;
+DBGrid1.Top:=PageControl1.Top+5;
+DBGrid1.Height:=PageControl1.Height-65;
+DBGrid1.Left:=PageControl1.Left+5;
+DBGrid1.Width:=PageControl1.Width-5;
+DBGrid2.Top:=PageControl1.Top+5;
+DBGrid2.Height:=PageControl1.Height-65;
+DBGrid2.Left:=PageControl1.Left+5;
+DBGrid2.Width:=PageControl1.Width-5;
+DBNavigator1.Top:=DBGrid1.Top+DBGrid1.Height;
+DBNavigator1.Left:=(Form1.ClientWidth div 2)-(DBNavigator1.Width div 2);
+DBNavigator2.Top:=DBGrid2.Top+DBGrid2.Height;
+DBNavigator2.Left:=(Form1.ClientWidth div 2)-(DBNavigator2.Width div 2);
+end;
+
+procedure TForm1.N14Click(Sender: TObject);
+begin
+PageControl1.ActivePage:=TabSheet1;
+end;
+
+procedure TForm1.N13Click(Sender: TObject);
+begin
+PageControl1.ActivePage:=TabSheet2;
+end;
+
+procedure TForm1.N16Click(Sender: TObject);
+begin
+if PageControl1.ActivePage=TabSheet1 then Table:=DataModule2.Table1
+else Table:=DataModule2.Table2;
+Form3.Show;
+end;
+
+procedure TForm1.N18Click(Sender: TObject);
+begin
+if PageControl1.ActivePage=TabSheet1 then Table:=DataModule2.Table1
+else Table:=DataModule2.Table2;
+Form4.Show;
+end;
+
+procedure TForm1.DBNavigator1Click(Sender: TObject; Button: TNavigateBtn);
+begin
+{if DBNavigator1.BtnClick(nbPost)then Form1.N4.Enabled:=false;
+if (DBNavigator1.BtnClick(nbInsert))or(DBNavigator1.BtnClick(nbDelete))or
+(DBNavigator1.BtnClick(nbEdit))then Form1.N4.Enabled:=true;   }
+end;
+end.
